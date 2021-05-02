@@ -16,6 +16,7 @@ const { appendFile, truncate } = require('fs');
     }); 
 
     bash.stdout.on('data', (data) => {
+        console.log(data.toString());
         appendFile('./src/ecmaHelper/evalJs.result.d.js', `${data.toString()}\n`, () => {});
     });
 
