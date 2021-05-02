@@ -104,12 +104,6 @@ if vcbot:
 
     async def leave_vc(data):
         try:
-            await get_entity(data["chat"]["id"])
-        except Exception as ex:
-            return await bot.send_message(
-                data["chat"]["id"], "Exception in Get_Entity : `" + str(ex) + "`"
-            )
-        try:
             full_chat = await vcbot(GetFullChannelRequest(data["chat"]))
         except Exception as ex:
             return await bot.send_message(
@@ -155,18 +149,17 @@ if vcbot:
                     response = await join_call(data["data"])
 
                 if data["_"] == "leave":
-                    print(data)
-                    # print(
-                    #     f"Received **Leave Request** In `{(await bot.get_entity(data['chat']['id'])).title}`"
-                    # )
-                    # await bot.send_message(
-                    #     Var.LOG_CHANNEL,
-                    #     f"Received **Leave Request** In `{(await bot.get_entity(data['chat']['id'])).title}`",
-                    # )
-                    # await bot.send_message(
-                    #     data["chat"]["id"],
-                    #     f"Received **Leave Request** In `{(await bot.get_entity(data['chat']['id'])).title}`",
-                    # )
+                    print(
+                        f"Received **Leave Request** In `{(await bot.get_entity(data['chat']['id'])).title}`"
+                    )
+                    await bot.send_message(
+                        Var.LOG_CHANNEL,
+                        f"Received **Leave Request** In `{(await bot.get_entity(data['chat']['id'])).title}`",
+                    )
+                    await bot.send_message(
+                        data["chat"]["id"],
+                        f"Received **Leave Request** In `{(await bot.get_entity(data['chat']['id'])).title}`",
+                    )
                     response = await leave_vc(data["data"])
 
                 if response is not None:
