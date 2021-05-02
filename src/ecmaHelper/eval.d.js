@@ -6,7 +6,7 @@
 // <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 const { exec } = require('child_process');
-const { appendFile, truncate } = require('fs');
+const { appendFileSync, truncate } = require('fs');
 
 (async () => {
     const bash = exec('node ./src/ecmaHelper/evalJs.run.js');
@@ -17,10 +17,10 @@ const { appendFile, truncate } = require('fs');
 
     bash.stdout.on('data', (data) => {
         console.log(data.toString());
-        appendFile('./src/ecmaHelper/evalJs.result.d.js', `${data.toString()}\n`, () => {});
+        appendFileSync('./src/ecmaHelper/evalJs.result.d.js', `${data.toString()}\n`, () => {});
     });
 
-    bash.stderr.on('error', (error) => {
-        appendFile('./src/ecmaHelper/evalJs.result.d.js', `${error}\n`, () => {});
+    bash.stderr.on('data', (error) => {
+        appendFileSync('./src/ecmaHelper/evalJs.result.d.js', `${error}\n`, () => {});
     });
 })();
