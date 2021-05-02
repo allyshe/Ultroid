@@ -18,16 +18,14 @@ export const playHandler = Composer.command('play', async ctx => {
     const { chat } = ctx.message;
 
     if (chat.type !== 'supergroup') {
-        await ctx.reply('I can only play in groups.');
-        return;
+        return await ctx.reply('I can only play in groups.');
     }
 
     const [ commandEntity ] = ctx.message.entities!;
     const text = ctx.message.text.slice(commandEntity.length + 1) || deunionize(ctx.message.reply_to_message)?.text;
 
     if (!text) {
-        await ctx.reply('You need to specify a YouTube URL / Search Keyword.');
-        return;
+        return await ctx.reply('You need to specify a YouTube URL / Search Keyword.');
     }
 
     const index = await addToQueue(chat, text, {

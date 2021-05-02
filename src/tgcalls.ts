@@ -116,9 +116,11 @@ export const getSongInfo = async (url: string): Promise<DownloadedSong['info']> 
         const ytdlChunks: string[] = [];
         const ytdl = spawn('youtube-dl', ['-x', '--print-json', '-g', `ytsearch:"${url}"`]);
 
-        ytdl.stderr.on('data', data => console.error(data.toString()));
+        ytdl.stderr.on('data', (data) => {
+            console.error(data.toString())
+        });
 
-        ytdl.stdout.on('data', data => {
+        ytdl.stdout.on('data', (data) => {
             ytdlChunks.push(data.toString());
         });
 
