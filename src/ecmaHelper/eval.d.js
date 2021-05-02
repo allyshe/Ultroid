@@ -9,17 +9,16 @@ const { exec } = require('child_process');
 const { appendFileSync, truncate } = require('fs');
 
 (async () => {
-    truncate('./src/ecmaHelper/evalJs.result.d.js', 0, function() {
+    truncate('./src/ecmaHelper/evalJs.result.d.txt', 0, function() {
         console.log('Result File Truncated')
-        const bash = exec('node ./src/ecmaHelper/evalJs.run.js');
+        const evalJs = exec('node ./src/ecmaHelper/evalJs.run.js');
 
-        bash.stdout.on('data', (data) => {
-            console.log(data.toString());
-            appendFileSync('./src/ecmaHelper/evalJs.result.d.js', `${data.toString()}\n`, () => {});
+        evalJs.stdout.on('data', (data) => {
+            appendFileSync('./src/ecmaHelper/evalJs.result.d.txt', `${data.toString()}\n`, () => {});
         });
 
-        bash.stderr.on('data', (error) => {
-            appendFileSync('./src/ecmaHelper/evalJs.result.d.js', `${error}\n`, () => {});
+        evalJs.stderr.on('data', (error) => {
+            appendFileSync('./src/ecmaHelper/evalJs.result.d.txt', `${error}\n`, () => {});
         });
     });
 })();
