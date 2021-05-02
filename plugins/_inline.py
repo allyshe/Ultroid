@@ -10,7 +10,7 @@ import re
 import time
 from datetime import datetime
 from math import ceil
-from platform import python_version as pyver
+from platform import python_version as PyVer
 
 from git import Repo
 from pyUltroid import __version__ as UltVer
@@ -45,7 +45,7 @@ async def e(o):
         ultroid_version,
         UltVer,
         uptime,
-        pyver(),
+        PyVer(),
         __version__,
         Repo().active_branch,
     )
