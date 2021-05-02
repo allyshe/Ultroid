@@ -10,7 +10,6 @@ import re
 import time
 from datetime import datetime
 from math import ceil
-from platform import python_version as pyver
 
 from git import Repo
 from pyUltroid import __version__ as UltVer
@@ -19,6 +18,7 @@ from telethon import Button, __version__, events
 from telethon.tl.types import InputWebDocument
 
 from . import *
+from platform import python_version as pyver
 
 # ================================================#
 notmine = f"This bot is for {OWNER_NAME}"
@@ -135,8 +135,6 @@ if Var.BOT_USERNAME is not None and asst is not None:
             )
             await event.answer([result] if result else None)
 
-    @inline
-    @in_owner
     @callback("ownr")
     @owner
     async def setting(event):
