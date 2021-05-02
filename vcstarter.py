@@ -149,7 +149,10 @@ if vcbot:
                     response = await join_call(data["data"])
 
                 if data["_"] == "leave":
-                    await bot.send_message(Var.LOG_CHANNEL, str(data))
+                    await bot.send_message(
+                        Var.LOG_CHANNEL,
+                        str(data)
+                    )
                     # print(
                     #     f"Received **Leave Request** In `{(await bot.get_entity(data['chat']['id'])).title}`"
                     # )
