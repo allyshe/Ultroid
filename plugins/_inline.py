@@ -36,10 +36,11 @@ else:
 @in_pattern("")
 @in_owner
 async def e(o):
-    b = o.builder
-    uptime = grt(time.time() - start_time)
-    header = udB.get("ALIVE_TEXT") if udB.get("ALIVE_TEXT") else "Hey,  I am alive."
-    ALIVEMSG = get_string("alive_1").format(
+    if len(o.text)==0:
+        b = o.builder
+        uptime = grt(time.time() - start_time)
+        header = udB.get("ALIVE_TEXT") if udB.get("ALIVE_TEXT") else "Hey,  I am alive."
+        ALIVEMSG = get_string("alive_1").format(
         header,
         OWNER_NAME,
         ultroid_version,
@@ -48,9 +49,9 @@ async def e(o):
         PyVer(),
         __version__,
         Repo().active_branch,
-    )
-    res = [
-        await b.article(
+        )
+        res = [
+            await b.article(
             title="Ultroid Userbot",
             url="https://t.me/TeamUltroid",
             description="Userbot | Telethon ",
@@ -67,7 +68,7 @@ async def e(o):
             ],
         ),
     ]
-    await o.answer(res, switch_pm=f"👥 ULTROID PORTAL", switch_pm_param="start")
+        await o.answer(res, switch_pm=f"👥 ULTROID PORTAL", switch_pm_param="start")
 
 
 if Var.BOT_USERNAME is not None and asst is not None:
