@@ -12,7 +12,7 @@
    To get info about it.
 """
 
-import os
+import os, time
 
 from . import *
 
@@ -26,8 +26,9 @@ async def mi(e):
     murl = r.media.stringify()
     url = make_html_telegraph("Mediainfo", "Ultroid", f"<code>{murl}</code>")
     ee = await eor(e, f"**[{xx}]({url})**\n\n`Loading More...`", link_preview=False)
-    dl = await ultroid_bot.download_media(r.media)
-    out, er = await bash(f"mediainfo {dl} --Output=HTML")
+    taime = time.time()
+    dl = await downloader(r.file.name, r.media.document, ee, taime, "Getting Media info...")
+    out, er = await bash(f"mediainfo {dl.name} --Output=HTML")
     urll = make_html_telegraph("Mediainfo", "Ultroid", out)
     os.remove(dl)
     if er:
