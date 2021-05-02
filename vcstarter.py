@@ -104,7 +104,7 @@ if vcbot:
 
     async def leave_vc(data):
         try:
-            full_chat = await vcbot(GetFullChannelRequest(data["chat"]))
+            full_chat = await vcbot(GetFullChannelRequest(data["chat"]['id']))
         except Exception as ex:
             return await bot.send_message(
                 data["chat"]["id"],
