@@ -36,38 +36,38 @@ else:
 @in_pattern("")
 @in_owner
 async def e(o):
-    if len(o.text)==0:
+    if len(o.text) == 0:
         b = o.builder
         uptime = grt(time.time() - start_time)
         header = udB.get("ALIVE_TEXT") if udB.get("ALIVE_TEXT") else "Hey,  I am alive."
         ALIVEMSG = get_string("alive_1").format(
-        header,
-        OWNER_NAME,
-        ultroid_version,
-        UltVer,
-        uptime,
-        PyVer(),
-        __version__,
-        Repo().active_branch,
+            header,
+            OWNER_NAME,
+            ultroid_version,
+            UltVer,
+            uptime,
+            PyVer(),
+            __version__,
+            Repo().active_branch,
         )
         res = [
             await b.article(
-            title="Ultroid Userbot",
-            url="https://t.me/TeamUltroid",
-            description="Userbot | Telethon ",
-            text=ALIVEMSG,
-            thumb=InputWebDocument(ULTROID_PIC, 0, "image/jpeg", []),
-            buttons=[
-                [Button.url(text="Support Group", url="t.me/UltroidSupport")],
-                [
-                    Button.url(
-                        text="Repo",
-                        url="https://github.com/Teamultroid/Ultroid",
-                    ),
+                title="Ultroid Userbot",
+                url="https://t.me/TeamUltroid",
+                description="Userbot | Telethon ",
+                text=ALIVEMSG,
+                thumb=InputWebDocument(ULTROID_PIC, 0, "image/jpeg", []),
+                buttons=[
+                    [Button.url(text="Support Group", url="t.me/UltroidSupport")],
+                    [
+                        Button.url(
+                            text="Repo",
+                            url="https://github.com/Teamultroid/Ultroid",
+                        ),
+                    ],
                 ],
-            ],
-        ),
-    ]
+            ),
+        ]
         await o.answer(res, switch_pm=f"👥 ULTROID PORTAL", switch_pm_param="start")
 
 
