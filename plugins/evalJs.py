@@ -7,7 +7,7 @@
 
 """
 ✘ Commands Available -
-• `js <javaScriptCommands>`
+• `evaljs <javaScriptCommands>`
     Evaluate JavaScript code and upload.
 """
 
@@ -53,9 +53,9 @@ async def evalJs(
     file.close()
 
 
-# The Command Is `.js`
+# The Command Is `.evaljs`
 @ultroid_cmd(
-    pattern="jseval ?(.*)",
+    pattern="evaljs",
 )
 async def evaluateJs(event):
     start = time.time()
@@ -68,8 +68,11 @@ async def evaluateJs(event):
         )
         return
     xx = await eor(event, "`Running Thread ...`")
-    cmd = event.pattern_match.group(1)
-    if cmd:
+    try:
+        cmd = event.text.split(" ", maxsplit=1)[1]
+    except IndexError:
+        return await eod(xx, "`Give some JS command`", time=7)
+    if cmd and cmd != "":
         Thread(
             target=await evalJs(
                 event,
@@ -77,5 +80,3 @@ async def evaluateJs(event):
                 startTime=start,
             )
         ).start()
-    else:
-        return await eod(xx, "`Give some JS command`", time=7)
