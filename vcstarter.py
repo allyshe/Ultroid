@@ -14,7 +14,6 @@ from telethon.tl.functions.phone import (
 )
 from telethon.tl.types import DataJSON
 
-
 if vcbot is not None:
 
     bot = TelegramClient(None, Var.API_ID, Var.API_HASH).start(bot_token=Var.BOT_TOKEN)
