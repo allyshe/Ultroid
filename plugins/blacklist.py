@@ -88,7 +88,7 @@ async def bl(e):
                         return
                 await e.delete()
         else:
-            k = re.search(xx, x, flags=re.IGNORECASE)
+            k = re.search(str(xx), str(x), flags=re.IGNORECASE)
             if k:
                 async for l in ultroid_bot.iter_participants(
                     e.chat_id, filter=ChannelParticipantsAdmins
