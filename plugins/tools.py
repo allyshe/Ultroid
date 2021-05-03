@@ -11,7 +11,7 @@
 • `{i}bash <cmds>`
     Run linux commands on telegram.
 
-• `{i}eval <cmds>`
+• `{i}evalpy <cmds>`
     Evaluate python commands on telegram.
 
 • `{i}circle`
@@ -311,7 +311,7 @@ async def _(event):
 
 
 @ultroid_cmd(
-    pattern="eval",
+    pattern="evalpy",
 )
 async def _(event):
     if not event.out and not is_fullsudo(event.sender_id):
@@ -353,7 +353,7 @@ async def _(event):
     else:
         evaluation = "Success"
     final_output = (
-        "__►__ **EVAL**\n```{}``` \n\n __►__ **OUTPUT**: \n```{}``` \n".format(
+        "__►__ **EVALPy**\n```{}``` \n\n __►__ **OUTPUT**: \n```{}``` \n".format(
             cmd,
             evaluation,
         )
