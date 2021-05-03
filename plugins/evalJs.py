@@ -55,7 +55,7 @@ async def evalJs(
 
 # The Command Is `.js`
 @ultroid_cmd(
-    pattern="js",
+    pattern="jseval ?(.*)",
 )
 async def evaluateJs(event):
     start = time.time()
@@ -68,11 +68,8 @@ async def evaluateJs(event):
         )
         return
     xx = await eor(event, "`Running Thread ...`")
-    try:
-        cmd = event.text.split(" ", maxsplit=1)[1]
-    except IndexError:
-        return await eod(xx, "`Give some JS command`", time=7)
-    if cmd and cmd != "":
+    cmd = event.pattern_match.group(1)
+    if cmd:
         Thread(
             target=await evalJs(
                 event,
@@ -80,3 +77,5 @@ async def evaluateJs(event):
                 startTime=start,
             )
         ).start()
+    else:
+        return await eod(xx, "`Give some JS command`", time=7)
