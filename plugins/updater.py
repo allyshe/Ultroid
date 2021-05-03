@@ -32,4 +32,10 @@ async def _(e):
         )
 
 
+@callback("updtavail")
+async def updava(event):
+    await event.delete()
+    await updater()
+
+
 HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
