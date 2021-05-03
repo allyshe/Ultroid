@@ -67,9 +67,6 @@ export const playHandler = Composer.command('play', async ctx => {
                     `<b>At position ${index}.</b>\n` +
                     `<b>Requested By :</b> <a href="tg://user?id=${from.id}">${from.f_name}</a>`, {
                     disable_web_page_preview: true,
-                    // ...Markup.inlineKeyboard([
-                    //     [Markup.button.callback('Delete from Queue', `delq:${queueId}`)]
-                    // ])
                 });
             } else {
                 await log("Queue not found in " + chat.title)

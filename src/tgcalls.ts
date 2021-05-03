@@ -54,7 +54,7 @@ interface CachedConnection {
 
 const ws = new WebSocket(env.WEBSOCKET_URL);
 const cache = new Map<number, CachedConnection>();
-
+var connection: TGCalls<{ chat: Chat.SupergroupChat; }>;
 const ffmpegOptions = "-preset ultrafast -c copy -acodec pcm_s16le -f s16le -ac 1 -ar 65000 pipe:1";
 
 ws.on('message', (response: any) => {
@@ -68,9 +68,9 @@ ws.on('message', (response: any) => {
             }
             break;
         }
-        // case 'left_vc': {
-        //     break;
-        // }
+        case 'left_vc': {
+            break;
+        }
         default:
             break;
     }
@@ -142,12 +142,16 @@ export const getSongInfo = async (url: string): Promise<DownloadedSong['info']> 
     });
 };
 
-const createConnection = async (chat: Chat.SupergroupChat): Promise<void> => {
+export const closeConnection = async(): Promise<void> => {
+    connection.close();
+}
+
+const createConnection = async(chat: Chat.SupergroupChat): Promise<void> => {
     if (cache.has(chat.id)) {
         return;
     }
 
-    const connection = new TGCalls({ chat });
+    connection = new TGCalls({ chat });
     const stream = new Stream();
     const queue: {
         url: string,

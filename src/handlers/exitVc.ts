@@ -8,7 +8,7 @@
 **/
 
 import { Composer } from 'telegraf';
-import { leaveVc } from '../tgcalls';
+import { closeConnection, leaveVc } from '../tgcalls';
 
 export const exitVcHandler = Composer.action('exitVc', async ctx => {
     const chat = ctx.callbackQuery.message?.chat;
@@ -34,6 +34,7 @@ export const exitCommand = Composer.command('exitVc', async ctx => {
         return;
     }
 
-    leaveVc(chat.id);
-    ctx.reply("Left Voice Chat.");
+    // leaveVc(chat.id);
+    closeConnection();
+    await ctx.reply("Left Voice Chat.");
 })
