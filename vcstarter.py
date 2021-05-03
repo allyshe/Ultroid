@@ -14,10 +14,10 @@ from telethon.tl.functions.phone import (
 )
 from telethon.tl.types import DataJSON
 
-bot = TelegramClient(None, Var.API_ID, Var.API_HASH).start(bot_token=Var.BOT_TOKEN)
 
+if vcbot is not None:
 
-if vcbot:
+    bot = TelegramClient(None, Var.API_ID, Var.API_HASH).start(bot_token=Var.BOT_TOKEN)
 
     async def get_entity(chat):
         try:
